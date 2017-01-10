@@ -1,0 +1,12 @@
+create
+isDeveloperServer
+profileName=AppSrv01
+cellName=maximoCell
+nodeName=maximoNode
+dmgrPort=8880
+serverName=server1
+profilePath=/opt/IBM/WebSphere/AppServer/profiles/AppSrv01
+templatePath=/opt/IBM/WebSphere/AppServer/profileTemplates/default
+enableAdminSecurity=true
+adminPassword=wasadmin
+adminUserName=wasadmin
