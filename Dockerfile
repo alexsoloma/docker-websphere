@@ -74,6 +74,7 @@ RUN chmod +x /bin/tini \
   && echo "$TINI_SHA  /bin/tini" | sha1sum -c -
 
 COPY WAS8.5.5_1 /tmp/was
+COPY IBMWASJAVA /tmp/java
 COPY Install_Mgr_v1.6.2 /tmp/installer
 COPY WASv85.base.install.xml /tmp/WASv85.base.install.xml
 
@@ -103,7 +104,7 @@ COPY maximo.ear /tmp/maximo.ear
 
 COPY docker-entrypoint.sh /
 RUN chmod 755 /docker-entrypoint.sh
-ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
+#ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
 
 
 

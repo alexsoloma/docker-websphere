@@ -9,6 +9,8 @@ EAR_INST_DIR=/projects/maximo/installed/
 
 if [ ! -a "$WEBSPHERE" ]; then
 	/tmp/installer/installc -acceptLicense -showProgress input /tmp/WASv85.base.install.xml
+	/opt/IBM/WebSphere/AppServer/bin/managesdk.sh -setNewProfileDefault -sdkname 1.7_64
+#	/opt/IBM/WebSphere/AppServer/bin/managesdk.sh -listAvailable -verbose
     /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -response /tmp/createprofile.txt
 fi
 

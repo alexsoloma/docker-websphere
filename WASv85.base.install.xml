@@ -148,7 +148,7 @@
      # And, you must use a key ring file with your response file.
      ################################################################## -->
     <repository location="/tmp/was/" />
-
+    <repository location="/tmp/java/" />
     <!-- <repository location="https://www.ibm.com/software/rational/repositorymanager/repositories/websphere" /> -->
 
     <!-- ##### Custom Repositories #######################################
@@ -277,6 +277,8 @@
 <offering id='com.ibm.websphere.BASE.v85' 
  profile='IBM WebSphere Application Server V8.5' 
  features='core.feature,ejbdeploy,thinclient,embeddablecontainer,com.ibm.sdk.6_64bit' installFixes='none'/>
+<offering id='com.ibm.websphere.IBMJAVA.v70' 
+  profile='IBM WebSphere Application Server V8.5' installFixes='none'/>
  <!-- <offering id='PM12345_WAS80' profile='IBM WebSphere Application Server V8.5'/> -->
 </install>
 
