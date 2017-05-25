@@ -104,7 +104,8 @@ COPY maximo.ear /tmp/maximo.ear
 
 COPY docker-entrypoint.sh /
 RUN chmod 755 /docker-entrypoint.sh
-#ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
+CMD ["/bin/bash"]
 
 
 
