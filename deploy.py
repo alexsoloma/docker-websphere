@@ -37,6 +37,17 @@ def installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir,
     # succeed
 #endDef
 
+
+def getAppStatus(appName):
+    # If objectName is blank, then the application is not running.
+    objectName = AdminControl.completeObjectName('type=Application,name=' + appName + ',*')
+    if objectName == "":
+        appStatus = 'Stopped'
+    else:
+        appStatus = 'Running'
+    return appStatus
+
+
 appName  =  sys.argv[0]
 earFile  =  sys.argv[1]
 installDir = sys.argv[2]
@@ -59,13 +70,15 @@ if installed == 0:
        result = AdminApp.isAppReady(appName)
     print("Starting application...")
 
+    appStatus = getAppStatus(appName)
+    if appStatus=='Stopped':
+      appManager = AdminControl.queryNames('cell=' + cellName + ',node=' + nodeName + ',type=' + 'ApplicationManager,process=' + serverName + ',*')
+      print appManager
 
-    appManager = AdminControl.queryNames('cell=' + cellName + ',node=' + nodeName + ',type=' + 'ApplicationManager,process=' + serverName + ',*')
-    print appManager
-
-    AdminControl.invoke(appManager, 'startApplication', appName)
-
-    print("Started")
+      AdminControl.invoke(appManager, 'startApplication', appName)
+      print("Started")
+    else:
+      print("Already Started!")  
 
 # wsadmin -f test.py appName earFile installDir appName cellName nodeName serverName
 # earFile = '/tmp/'
