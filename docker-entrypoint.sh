@@ -37,7 +37,7 @@ fi
 
 # if [ ! -a "$EAR_INST_DIR/MAXIMO.ear" ]; then
 # 	/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
-# 	/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -port 8880 -username wasadmin -password wasadmin -f /tmp/deploy.py MAXIMO /tmp/MAXIMO.ear $EAR_INST_DIR maximoCell maximoNode server1
+# 	/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -port 8880 -username wasadmin -password wasadmin -f /tmp/deploy.py maximo /tmp/maximo.ear $EAR_INST_DIR maximo maximoCell maximoNode server1
 # fi
 
 #tail -f /dev/null

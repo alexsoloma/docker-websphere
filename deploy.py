@@ -4,10 +4,11 @@ import string
 
 ## Example 11 Install application with various task and non task options ##
 def installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir, failonerror=AdminUtilities._BLANK_ ):
+    print("Starting installAppMaximo...")
     try:
         AdminApp.install(earFile ,'[-node ' + nodeName 
         	+ ' -appname ' + appName
-        	+ ' -contextroot myapp'
+        	+ ' -contextroot myapp123'
             + ' -cell ' + cellName 
             + ' -server ' + serverName 
             + ' -installed.ear.destination ' + installDir
@@ -31,6 +32,7 @@ def installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir,
 
         print("Started")
     except:
+        print("exception exit 0...")
         return 0
     #endTry
     return 1  
@@ -58,6 +60,7 @@ serverName = sys.argv[6]
 
 
 installed = installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir)
+# installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir)
 
 if installed == 0:
     AdminApp.update(appName, 'app', '[-operation update -contents ' + earFile + ' -usedefaultbindings -nodeployejb -BindJndiForEJBNonMessageBinding [["Incremen EJB module" Increment Increment.jar,META-INF/ejb-jar.xml Inc]]]')
