@@ -8,7 +8,7 @@ def installAppMaximo(appName, earFile, cellName,nodeName, serverName,installDir,
     try:
         AdminApp.install(earFile ,'[-node ' + nodeName 
         	+ ' -appname ' + appName
-        	+ ' -contextroot myapp123'
+        	+ ' -contextroot ' + appName
             + ' -cell ' + cellName 
             + ' -server ' + serverName 
             + ' -installed.ear.destination ' + installDir

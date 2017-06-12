@@ -103,7 +103,11 @@ COPY maximo.ear /tmp/maximo.ear
 #   && rm -f /tmp/createprofile.txt \
 
 COPY docker-entrypoint.sh /
-RUN chmod 755 /docker-entrypoint.sh
+COPY install.sh /tmp/install.sh
+COPY update.sh /tmp/update.sh
+COPY updateWar.py /tmp/updateWar.py
+RUN chmod 755 /docker-entrypoint.sh && chmod 755 /tmp/*.sh
+
 ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
 
