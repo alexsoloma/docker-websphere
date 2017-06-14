@@ -51,23 +51,30 @@ def createLibraryRef(appName,sharedLibName,contentUri):
 	modules = [module for module in modules if AdminConfig.showAttribute(module,'uri')==contentUri]
 	# get class loader
 	if len(modules) > 0:
-
-		print "create shared library reference for module" + contentUri
+		print modules 
+		print "create shared library reference for module " + contentUri
 		moduleClassLoader =  AdminConfig.showAttribute(modules[0],'classloader')
+
+		print moduleClassLoader
+		print AdminConfig.list('LibraryRef');
 	# print AdminConfig.list('LibraryRef')
 
 	# libObj = [lib for lib in AdminConfig.list('LibraryRef').split('\n') if lib.find(sharedLibName) == 0]
-
-		libRef = [lib for lib in AdminConfig.list('LibraryRef').split('\n') if AdminConfig.showAttribute(lib,'libraryName')==sharedLibName]
+		if AdminConfig.list('LibraryRef') != "":
+			libRef = [lib for lib in AdminConfig.list('LibraryRef').split('\n') if AdminConfig.showAttribute(lib,'libraryName')==sharedLibName]
 
 	# print libRef
 
-		if len(libRef) == 0:
+			if len(libRef) == 0:
+				print "not existing , creating "
+				libRef = AdminConfig.create('LibraryRef', moduleClassLoader, [['libraryName', sharedLibName]])
+				print libRef
+			else:
+				print "library reference existed,quit"
+		else:
 			print "not existing , creating "
 			libRef = AdminConfig.create('LibraryRef', moduleClassLoader, [['libraryName', sharedLibName]])
-			print libRef
-		else:
-			print "library reference existed,quit"
+			print libRef					
 	else:
 		print "could not find module you targeted,please double check"
 
