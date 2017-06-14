@@ -147,8 +147,10 @@
      # 
      # And, you must use a key ring file with your response file.
      ################################################################## -->
+    <repository location="/tmp/WAS8.5.5_1/" />
     <repository location="/tmp/was/" />
     <repository location="/tmp/java/" />
+
     <!-- <repository location="https://www.ibm.com/software/rational/repositorymanager/repositories/websphere" /> -->
 
     <!-- ##### Custom Repositories #######################################
@@ -274,12 +276,17 @@
 ####################################################################### -->
 
 <install modify='false'>
-<offering id='com.ibm.websphere.BASE.v85' 
- profile='IBM WebSphere Application Server V8.5' 
- features='core.feature,ejbdeploy,thinclient,embeddablecontainer,com.ibm.sdk.6_64bit' installFixes='none'/>
-<offering id='com.ibm.websphere.IBMJAVA.v70' 
-  profile='IBM WebSphere Application Server V8.5' installFixes='none'/>
- <!-- <offering id='PM12345_WAS80' profile='IBM WebSphere Application Server V8.5'/> -->
+    <!-- <offering id='com.ibm.websphere.BASE.v85' 
+     profile='IBM WebSphere Application Server V8.5' 
+     features='core.feature,ejbdeploy,thinclient,embeddablecontainer,com.ibm.sdk.6_64bit' installFixes='none'/>
+    <offering id='com.ibm.websphere.IBMJAVA.v70' 
+      profile='IBM WebSphere Application Server V8.5' installFixes='none'/> -->
+     <!-- <offering id='PM12345_WAS80' profile='IBM WebSphere Application Server V8.5'/> -->
+    <offering id='com.ibm.websphere.IBMJAVA.v80' 
+      profile='IBM WebSphere Application Server V8.5' installFixes='none'/>
+
+    <offering profile='IBM WebSphere Application Server V8.5' id='com.ibm.websphere.BASE.v85' 
+    version='8.5.5011.20161206_1434' features='core.feature,ejbdeploy,thinclient,embeddablecontainer,com.ibm.sdk.6_64bit'/>
 </install>
 
 <profile id='IBM WebSphere Application Server V8.5' 

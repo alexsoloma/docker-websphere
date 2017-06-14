@@ -17,15 +17,15 @@ EAR_INST_DIR=/projects/maximo/installed/
 
 if [ ! -d "$WEBSPHERE" ]; then
 	/tmp/installer/installc -acceptLicense -showProgress input /tmp/WASv85.base.install.xml
-	/opt/IBM/WebSphere/AppServer/bin/managesdk.sh -setNewProfileDefault -sdkname 1.7_64
+	/opt/IBM/WebSphere/AppServer/bin/managesdk.sh -setNewProfileDefault -sdkname 1.8_64
 #	/opt/IBM/WebSphere/AppServer/bin/managesdk.sh -listAvailable -verbose
     /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -response /tmp/createprofile.txt
     rm -f /tmp/WASv85.base.install.xml \
 	   && rm -r -f /tmp/was \
 	   && rm -r -f /tmp/installer \
-	  && rm /tmp/maximo.ear \
 	  && rm -f /tmp/createprofile.txt \
 	  && rm -r -f /tmp/java 
+	  # && rm /tmp/maximo.ear \
 	 #&& rm /tmp/deploy.py \
 fi
 
