@@ -1,0 +1,9 @@
+#IBM WebSphere Application Server key file
+#Thu Jun 08 13:08:09 CST 2017
+com.ibm.websphere.CreationDate=Thu Jun 08 13\:08\:09 CST 2017
+com.ibm.websphere.ltpa.version=1.0
+com.ibm.websphere.ltpa.3DESKey=vwUSJmVciseAekgYKsUljrLAuYWCDMnNVxLY0vah1XU\=
+com.ibm.websphere.CreationHost=cnwbzp1177
+com.ibm.websphere.ltpa.PrivateKey=P07+CDV+0w8Pil/EQwgyHV+cxQkovH6Ixb/NGBI1k8aY/Be6ev2V7Qh51lPCblZhxfzCMsAwijlNMt0u3XGIAd7nE15CAzCOgCXKCesn15low2bpZZz10MsTlYiW8uYe1LhPteSscO3fynMwE6DGaRS0vtTMLysuYISGRB3LHgbZppr2bsqjXbfLAyHPWtnTHYXsq7jihSAdwh0hovEX38zxGP467nONwmrLmVX8PAexJZhJd+mb1LuK2lPDODsi8IuOxq3mfso4WaQ3YTsIaPh5audY52SoeA0UcnOkk5jy5GulY0WvzPZMgxZ57Zm8YWlPQJP+Qlg5iRh25NuYVI/skPhOxVD5m0Nuz5jR+Ic\=
+com.ibm.websphere.ltpa.Realm=defaultWIMFileBasedRealm
+com.ibm.websphere.ltpa.PublicKey=APFM0dziClrF8vXglAR0iczlbm9NXux83KwVyDLjGnFzCZCKN5KdRpjN9oJ29Q1oMpsQ+FkTIXTnYLH76LugabsTsZ59kvBEW5lCoFynutUUszIapV+9Cha5kikLvt90cZ5u+jkdEfmAkl0uWfKyi9LPOt1yDcNqrazNA9Nye4aDAQAB
