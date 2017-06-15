@@ -47,6 +47,8 @@ COPY install.sh /tmp/install.sh
 COPY update.sh /tmp/update.sh
 COPY updateWar.py /tmp/updateWar.py
 COPY sharedLib.py /tmp/sharedLib.py
+COPY datasource.py /tmp/datasource.py
+COPY db2jcc.jar /tmp/SQLLIB/java
 
 RUN chmod 755 /docker-entrypoint.sh && chmod 755 /tmp/*.sh
 

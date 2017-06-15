@@ -10,3 +10,5 @@ sudo docker run -i -t --privileged=true --name="wasjdktest" -p 9080:9080 -p 9443
 
 
 /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -port 8880 -username wasadmin -password wasadmin -f /tmp/sharedLib.py maximo_spg maximoCell maximoNode server1
+
+/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -port 8880 -username wasadmin -password wasadmin -f /tmp/datasource.py maximoCell maximoNode server1
