@@ -38,7 +38,8 @@ COPY was.repo.9000.base.zip \
 
 RUN cd /tmp/wasinstall/ && \
   unzip agent.installer.lnx.gtk.x86_64_1.8.5.zip -d installer && \
-  /tmp/wasinstall/installer/installc -acceptLicense -showProgress input /tmp/wasinstall/was.base.9.xml
+  /tmp/wasinstall/installer/installc -acceptLicense -showProgress input /tmp/wasinstall/was.base.9.xml && \
+  rm -rf /tmp/wasinstall/
   
 #RUN /tmp/installer/installc -acceptLicense -showProgress input /tmp/WASv85.base.install.xml
 
@@ -47,8 +48,6 @@ COPY createprofile.txt /tmp/wasinstall/createprofile.txt
 RUN /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -response /tmp/wasinstall/createprofile.txt
 
 COPY deploy.py /deploy.py
-
-RUN rm -rf /tmp/wasinstall/ 
 
 COPY docker-entrypoint.9.sh /docker-entrypoint.sh
 RUN chmod 755 /docker-entrypoint.sh
