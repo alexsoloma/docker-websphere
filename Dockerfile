@@ -14,8 +14,6 @@
 
 FROM ubuntu:16.04
 
-MAINTAINER Kavitha Suresh Kumar <kavisuresh@in.ibm.com> (@kavi2002suresh)
-
 RUN apt-get update \
     && apt-get install -y wget unzip vim \
     && rm -rf /var/lib/apt/lists/*
