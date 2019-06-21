@@ -10,3 +10,4 @@ templatePath=/opt/IBM/WebSphere/AppServer/profileTemplates/default
 enableAdminSecurity=true
 adminPassword=wasadmin
 adminUserName=wasadmin
+#hostName=localhost

@@ -28,13 +28,16 @@ ENV TINI_SHA fa23d1e20732501c3bb8eeeca423c89ac80ed452
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static /bin/tini 
 RUN chmod +x /bin/tini \
   && echo "$TINI_SHA  /bin/tini" | sha1sum -c -
-
+WORKDIR /tmp/wasinstall/
 COPY was.repo.9000.base.zip \
-    9.0.0-WS-WAS-FP008.zip \
+    was.repo.9000.ihs.zip \
     was.base.9.xml \
     agent.installer.lnx.gtk.x86_64_1.8.5.zip \
-    ibm-java-sdk-8.0-5.25-linux-x64-installmgr.zip \
-    /tmp/wasinstall/
+    ibm-java-sdk-8.0-5.36-linux-x64-installmgr.zip \
+    9.0.0-WS-WAS-FP009.zip \
+    was.repo.9000.plugins.zip \
+    ./
+
 
 RUN cd /tmp/wasinstall/ && \
   unzip agent.installer.lnx.gtk.x86_64_1.8.5.zip -d installer && \
