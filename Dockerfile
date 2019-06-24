@@ -12,22 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:16.04
+FROM ubuntu:16.04 as builder
 
 RUN apt-get update \
     && apt-get install -y wget unzip vim \
     && rm -rf /var/lib/apt/lists/*
 # resolve - can not start profile
-RUN echo "dash dash/sh boolean false" | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
+RUN echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
-ENV TINI_VERSION 0.9.0
-ENV TINI_SHA fa23d1e20732501c3bb8eeeca423c89ac80ed452
-
-# Use tini as subreaper in Docker container to adopt zombie processes 
-ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static /bin/tini 
-RUN chmod +x /bin/tini \
-  && echo "$TINI_SHA  /bin/tini" | sha1sum -c -
 WORKDIR /tmp/wasinstall/
 COPY was.repo.9000.base.zip \
     was.repo.9000.ihs.zip \
@@ -38,24 +30,35 @@ COPY was.repo.9000.base.zip \
     was.repo.9000.plugins.zip \
     ./
 
-
 RUN cd /tmp/wasinstall/ && \
   unzip agent.installer.lnx.gtk.x86_64_1.8.5.zip -d installer && \
   /tmp/wasinstall/installer/installc -acceptLicense -showProgress input /tmp/wasinstall/was.base.9.xml && \
   rm -rf /tmp/wasinstall/
-  
-#RUN /tmp/installer/installc -acceptLicense -showProgress input /tmp/WASv85.base.install.xml
 
-COPY createprofile.txt /tmp/wasinstall/createprofile.txt
+# Final image
+FROM ubuntu:16.04
 
-RUN /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -response /tmp/wasinstall/createprofile.txt
+COPY --from=builder /opt/IBM /opt/IBM
 
-COPY deploy.py /deploy.py
+COPY deploy.py createprofile.txt docker-entrypoint.9.sh /
 
-COPY docker-entrypoint.9.sh /docker-entrypoint.sh
-RUN chmod 755 /docker-entrypoint.sh
-ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.sh"]
+RUN apt-get update \
+    && apt-get install -y vim \
+    && rm -rf /var/lib/apt/lists/*
+# resolve - can not start profile
+RUN echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
+ENV TINI_VERSION 0.9.0
+ENV TINI_SHA fa23d1e20732501c3bb8eeeca423c89ac80ed452
+
+# Use tini as subreaper in Docker container to adopt zombie processes 
+ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static /bin/tini 
+RUN chmod +x /bin/tini \
+  && echo "$TINI_SHA  /bin/tini" | sha1sum -c \
+  && /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -response /createprofile.txt \
+  && chmod 755 /docker-entrypoint.9.sh
+
+ENTRYPOINT ["/bin/tini", "--","/docker-entrypoint.9.sh"]
 
 
 
