@@ -11,28 +11,39 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 FROM ubuntu:16.04 as builder
 
 RUN apt-get update \
-    && apt-get install -y wget unzip vim \
+    && apt-get install -y unzip \
     && rm -rf /var/lib/apt/lists/*
 # resolve - can not start profile
 RUN echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 WORKDIR /tmp/wasinstall/
-COPY was.repo.9000.base.zip \
-    was.repo.9000.ihs.zip \
-    was.base.9.xml \
-    agent.installer.lnx.gtk.x86_64_1.8.5.zip \
-    ibm-java-sdk-8.0-5.36-linux-x64-installmgr.zip \
-    9.0.0-WS-WAS-FP009.zip \
-    was.repo.9000.plugins.zip \
-    ./
+COPY  8.0.5.27-WS-IBMWASJAVA-Linux.zip \
+      8.5.5-WS-WAS-FP015-part1.zip \
+      8.5.5-WS-WAS-FP015-part2.zip \
+      8.5.5-WS-WAS-FP015-part3.zip \
+      8.5.5-WS-WASSupplements-FP015-part1.zip \
+      8.5.5-WS-WASSupplements-FP015-part2.zip \
+      8.5.5-WS-WASSupplements-FP015-part3.zip \
+      agent.installer.lnx.gtk.x86_64_1.8.5.zip \
+      WAS_V8.5.5__1_OF_3__MPML.zip \
+      WAS_V8.5.5__2_OF_3__MPML.zip \
+      WAS_V8.5.5__3_OF_3__MPML.zip \
+      WAS_V8.5.5_SUPPL_1_OF_3.zip \
+      WAS_V8.5.5_SUPPL_2_OF_3.zip \
+      WAS_V8.5.5_SUPPL_3_OF_3.zip \
+      was.base.855.xml \
+      ./
 
 RUN cd /tmp/wasinstall/ && \
   unzip agent.installer.lnx.gtk.x86_64_1.8.5.zip -d installer && \
-  /tmp/wasinstall/installer/installc -acceptLicense -showProgress input /tmp/wasinstall/was.base.9.xml && \
+  unzip '8.5.5-WS-WASSupplements-FP015-part*.zip' -d was_f15_s && \
+  unzip '8.5.5-WS-WAS-FP015-part*.zip' -d was_f15 && \
+  unzip 'WAS_V8.5.5__*_OF_3__MPML.zip' -d was && \
+  unzip 'WAS_V8.5.5_SUPPL_*_OF_3.zip' -d was_s && \
+  /tmp/wasinstall/installer/installc -acceptLicense -showProgress input /tmp/wasinstall/was.base.855.xml && \
   rm -rf /tmp/wasinstall/
 
 # Final image
